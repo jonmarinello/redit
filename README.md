@@ -1,2 +1,2 @@
 # redit
-Old C port of the Basic fill screen editor I wrote
+Old 'C' port of the Basic full screen editor I wrote in 1983-1984.
