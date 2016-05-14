@@ -1,0 +1,914 @@
+	R-EDIT Version 4.01 ON-LINE Manual
+
+        R-EDIT Type I Commands in Summary
+
+                The Type  I  commands  form  all  the  line  editing
+        functions,  editor  setup  and  command history recall. Full
+        command line editing is also provided. By default, the  user
+        is in replace mode.
+
+        Setup Commands:
+
+                BELL [ON | OFF]
+                MONO(chrome display)
+                COLOR(display)
+                VIEW(port coordinates)
+                DELIM(iting character) [C]
+                F{1..12} [type I command]
+                TABS [{C | BAS(ic) | COB(ol) | FOR(tran) |
+                        ASM(bler) | PLI} | tab_seq]
+
+        Line Editing Commands:
+
+                FO(rward page) [nnn]
+                BA(ckward page) [nnn]
+                T(op of file)
+                B(ottom of file)
+                N(ext line) [nnn]
+                U(up line) [nnn]
+                CURLIN(e)
+                DEL(ete line) [{* | nnn}]
+                L(ocate)U(p) [/string/]
+                L(ocate)D(own) [/string/]
+                C(hange) [{* | nnn}] /old/new/ [G]
+                ?  (display current search string pattern)
+                << (shift viewport to <1..72>)
+                <  (shift viewport to the left by 36 columns)
+                >  (shift viewport to the right by 36 columns)
+
+        File Access Commands:
+
+                W(rite)[Q(uit)] [filename]
+                Q(uit)
+                NEW [filename]
+                FILE <filename>
+                !DEL(ete) <filename>
+                !REN(ame) <oldname> <newname>
+                HELP (display quick reference)
+
+        Command History Recall and Editing:
+
+                <UP-ARROW>, <DOWN-ARROW> (recall old command)
+                <LEFT-ARROW>, <BACKSPACE> (move cursor)
+                <RIGHT-ARROW> (move cursor)
+                <INS> (enter or exit insert mode)
+                <DEL> (delete a character)
+                <ESC> (discard command)
+                <RETURN>, <END> (execute type I command or
+                                enter type II area)
+
+        R-EDIT Type II & III Commands in Summary
+
+                The  Type  II  commands  form  all   text   movement
+        functions  while  in full screen mode. The Type III commands
+        form all the normal full screen edit functions. By  default,
+        the user is in replace mode.
+
+        Type II Line Editing functions:
+
+                A(ppend line) [nnn]
+                C(opy line) [nnn]
+                D(elete line) [nnn]
+                I(nsert line(s))
+                K(opy line) [nnn]
+                M(ove line) [nnn]
+                "(duplicate line) [nnn]
+                /(set new current line)
+
+        Type II and III cursor movements.
+
+                <HOME> (move cursor to home of type II)
+                <UP-ARROW> (go up one line)
+                <DOWN-ARROW> (go down one line)
+                <LEFT-ARROW>, <BACKSPACE> (go left one column)
+                <RIGHT-ARROW> (go right one column)
+                <CTRL><LEFT-ARROW> (go left one block)
+                <CTRL><RIGHT-ARROW> (go right one block)
+                <TAB> (tab to right)
+                <SHIFT><TAB> (tab to left)
+                <RETURN> (move to next line, column 1 of
+                                type II or III area)
+
+        Type II and III modes.
+
+                <INS> (enter or exit insert mode)
+                <DEL> (delete a character)
+                <ESC> (discard all modifications in type II and III)
+                <END> (save all modifications in type II and III)
+
+        R-EDIT Type I Commands in Detail
+
+        BELL {ON | OFF}
+
+                The BELL command is used to enable  or  disable  the
+        bell  which  is  sounded  in  case  of  errors  or important
+        information.  The setting of the bell is only  active  while
+        in the editor. The default is bell ON.
+
+        Example: BELL OFF
+
+        This command may be invoked in the startup profile REDIT.RC.
+
+        MONO(chrome display)
+
+                By  specifying  the  MONO   command,   all   display
+        characteristics  are  shifted  to  monochrome  format. Color
+        display is the default.
+
+        Example: MONO
+
+        This command may be invoked in the startup profile REDIT.RC.
+
+        COLOR(display)
+
+                By  specifying  the  COLOR  command,   all   display
+        characteristics  are  shifted to color format. Color display
+        is the default.
+
+        Example: COLOR
+
+        This command may be invoked in the startup profile REDIT.RC.
+
+        VIEW(port coordinates)
+
+                The VIEW command will  cause  the  current  viewport
+        coordinates  to  be displayed on the ruler-status line. This
+        feature will be usefull to those  programmers  who  want  to
+        edit source files which contain long lines (ie. greater than
+        72 columns). See the next section regarding  the  "<<",  "<"
+        and ">" commands for shifting the viewport.
+
+        Example: VIEW
+
+        This command may be invoked in the startup profile REDIT.RC.
+
+        DELIM(iting character) [C]
+
+                The DELIM command may be used to display  or  modify
+        the  current  delimiting  charater  used in text searches in
+        substitutions. If no argument is  given,  then  the  current
+        delimiting  character is displayed on the ruler-status line.
+        Only the  first  character  of  the  argument  specified  is
+        retained.
+
+        Example: DELIM #
+
+        This command may be invoked in the startup profile REDIT.RC.
+
+        F{1..12} [type I command]
+
+                The F command allows setting or display of  function
+        key  actions.   Normally  the  editor  is  preset  with  the
+        following standard function key actions:
+
+                F1      FO(rward page)
+                F2      BA(ckward page)
+                F3      N(ext line)
+                F4      U(p line)
+                F5      CURLIN(e)
+                F6      VIEW(port coordinates)
+                F7      LD
+                F8      LU
+
+                These default function key values may of  course  be
+        changed  to  whatever  you desire. Only twelve function keys
+        are programmable at the present time.
+
+        Example: F12 W
+
+        This command may be invoked in the startup profile REDIT.RC.
+
+        TABS [{C | BAS(ic) | COB(ol) | FOR(tran) |
+                ASM(bler) | PLI} | tab_seq]
+
+                Tabs may be set or displayed using the TABS command.
+        A  number  of  preprogrammed  tab  settings are available to
+        assist you in setting tabs for the language you  use  in  an
+        appropriate  way. The languages that are currently supported
+        are 'C', BASIC, COBOL, FORTRAN, Assembler and PLI.  If  none
+        of  the above tab settings fit your needs, you may of course
+        specify any tab sequence you desire. The  preprogrammed  tab
+        stops are as follows:
+
+                C       8,16,24,32,40,48,56,64,72
+
+                BASIC   10,20,30,40,50,60,70,80,90,100,
+                        110,120,130,140,150,160,170,180,
+                        190,200,210,220,230,240,250
+
+                COBOL   8,12,16,20,24,28,32,36,40,44,48,
+                        52,56,60,64,68,72
+
+                FORTRAN 7,72
+
+                ASM     10,20,30,40,50
+
+                PLI     5,10,15,20,25,30,35,40,45,50,55,
+                        60,65,70
+
+        To specify another tab sequence enter (for example):
+
+                TABS 20,30,50,70 <RETURN>
+
+        Example: TABS COB
+
+        FO(rward page) [nnn]
+
+                The FO command scrolls forward nnn pages in the text
+        file. If this action would go past the end of file, then the
+        last line is displayed. If no parameter is  specified,  then
+        one page is assumed.
+
+        Example: FO 10
+
+        BA(ackward page) [nnn]
+
+                The BA command scrolls backward  nnn  pages  in  the
+        text  file.  If  this  action would go past the beginning of
+        file, then the first screen is displayed. If no parameter is
+        specified, then one page is assumed.
+
+        Example: BA 5
+
+        T(op of file)
+
+                The T command moves the current line pointer to  the
+        beginning  of  the  text file. The "***** TOP OF FILE *****"
+        constant will be displayed on the first line of the type III
+        area.
+
+        Example: T
+
+        B(ottom of file)
+
+                The B command moves the current line pointer to  the
+        last  line  of  the text file. The "***** END OF FILE *****"
+        constant will be displayed on the last line of the type  III
+        area.
+
+        Example: B
+
+        N(ext line) [nnn]
+
+                The N command skips forward nnn lines  in  the  text
+        file.  If  no argument is given 1 is assumed. If this action
+        would go past the end of file, then the last  line  will  be
+        displayed.
+
+        Example: N 7
+
+        U(p line) [nnn]
+
+                The U command skips backward nnn lines in  the  text
+        file.  If  no argument is given 1 is assumed. If this action
+        would go past the beginning of file, then the top of file is
+        assumed and the first screen will be displayed.
+
+        Example: U 5
+
+        CURLIN(e)
+
+                CURLIN is used to display the current  line  pointer
+        on the ruler-status line.
+
+        Example: CURLIN
+
+        DEL(ete line) [{* | nnn}]
+
+                The DEL command is used  to  delete  lines  starting
+        with  the  first line displayed in the type III area through
+        *(ie. all remaining) or nnn lines.  If no argument is  given
+        it  is assumed to be 1. If this action would go past the end
+        of file all lines from the first line displayed in the  type
+        III area through the end of file are deleted.
+
+        Example: DEL 100
+        Example: DEL *
+
+        L(ocate)U(p) [/string/]
+
+                The LU command is used to search the  workspace  for
+        the current text pattern string. If no argument is given the
+        current text pattern string is used, otherwise the new  text
+        pattern  string  is  set  to  "string".  It  is important to
+        understand that the slash '/' character used  above  is  the
+        default  delimiting  character  and  may not be contained in
+        "string".  If this is the case, use  the  DELIM  command  to
+        change  the  delimiting character.  LU begins searching from
+        the current line pointer (minus one) through the file  until
+        the  text  pattern  string  is located or the top of file is
+        reached. If the text pattern  is  not  matched  the  message
+        "pattern  not  found" is displayed on the ruler-status line.
+        If LU is then called again, the search is restarted from the
+        end  of  file. Each time an argument is given it becomes the
+        current text pattern string.
+
+        Example: LU /dog/
+        Example: LU
+
+        L(ocate)D(own) [/string/]
+
+                The LD command is used to search the  workspace  for
+        the current text pattern string. If no argument is given the
+        current text pattern string is used, otherwise the new  text
+        pattern  string  is  set  to  "string".  It  is important to
+        understand that the slash '/' character used  above  is  the
+        default  delimiting  character  and  may not be contained in
+        "string".  If this is the case, use  the  DELIM  command  to
+        change  the  delimiting character.  LD begins searching from
+        the current line pointer (plus one) through the  file  until
+        the  text  pattern  string  is located or the end of file is
+        reached. If the text pattern  is  not  matched  the  message
+        "pattern  not  found" is displayed on the ruler-status line.
+        If LD is then called again, the search is restarted from the
+        top  of  file. Each time an argument is given it becomes the
+        current text pattern string.
+
+        Example: LD /cat/
+        Example: LD
+
+        C(hange) [{* | nnn}] /old/new/ [G]
+
+                The C command is used to change text pattern strings
+        within the workspace. Starting from the first line displayed
+        in the type III area, text lines may be changed.  The  first
+        argument  to  the  C  command  is optional. This argument if
+        given, specifies the number of lines which will be  possibly
+        affected  starting from the first line displayed in the type
+        III area. If  a  star  '*'  is  specified,  then  all  lines
+        starting from the current line will be subject to change. If
+        a numeric value is specified then it will be used.   If  nnn
+        is  greater then the number of lines remaining to the end of
+        file, then the behavour is the same as specifying  '*'.  The
+        second and third arguments are required. The second argument
+        specifies  the  text  string  to  be  modified.   The  third
+        argument specifies what the second argument is to be changed
+        to.  The final argument is optional and if specified, forces
+        all  occurances to be changed in all the lines specified. If
+        it is ommited, then only the first  occurance  of  "old"  on
+        each  line will be changed. If any changes occured, then the
+        number of changes made will be displayed on the ruler-status
+        line.  On  the other hand, if no text strings matching "old"
+        were found then the message  "pattern  not  found"  will  be
+        displayed  instead.   Note that the same rules regarding the
+        delimiting character for the LU and LD commands  also  apply
+        to the C command.
+
+        Example: C * /dog/cat/ G
+        Example: C 100 /dog/cat/
+
+        ?(display current search string pattern)
+
+                The ? command displays  the  current  search  string
+        pattern on the ruler-status line. This pattern is reset each
+        time a LU or LD command is issued with an argument.
+
+        Example: ?
+
+        << (shift viewport to <1..72>)
+
+                The << command will shift the viewport to  the  home
+        position  bounded  by the columns 1 and 72. If the editor is
+        already at the  home  position,  the  message  "at  viewport
+        boundry"   will  be  displayed  on  the  ruler-status  line.
+        Otherwise, the  home  viewport  boundries  <1..72>  will  be
+        displayed.
+
+        Example: <<
+
+        < (shift viewport to the left by 36 columns)
+
+                The < command will shift the viewport to the left by
+        36  columns.  If the editor is already at the home position,
+        the message "at viewport boundry" will be displayed  on  the
+        ruler-status  line.   Otherwise,  the new viewport boundries
+        will be displayed.
+
+        Example: <
+
+        > (shift viewport to the right by 36 columns)
+
+                The > command will shift the viewport to  the  right
+        by  36  columns.   If  the  editor is already at the extreme
+        right position (ie. <180..252>), the  message  "at  viewport
+        boundry"   will  be  displayed  on  the  ruler-status  line.
+        Otherwise, the new viewport boundries will be displayed.
+
+        Example: >
+
+        W(rite)[Q(uit)] [filename]
+
+                The  W  command  writes  out  to  disk  the  current
+        contents  of  the  workspace.   If  a Q is appended to the W
+        command, then the editor will exit to the  operating  system
+        after  the  file has been created/updated. If the [filename]
+        argument is included, then the filename  specified  will  be
+        written  to. Otherwise the current filename displayed on the
+        ruler-status line will be written to. In either case, if the
+        file  written to does not already exist, the message "saved"
+        will be displayed on the ruler-status line.  Otherwise,  the
+        not write out  the  workspace  before  exiting  R-EDIT,  all
+        changes will be lost.
+
+        Example: W
+        Example: WQ
+        Example: W TMP.SAV
+        Example: WQ TMP.SAV
+
+        Q(uit)
+
+                To exit from REDIT, type  Q  followed  by  <RETURN>.
+        Note  that  if  you  do  not  write  out the contents of the
+        workspace, all changes will be lost.
+
+        NEW [filename]
+
+                The NEW command allows editing of an alternate file.
+        If   you   supply   the   filename  argument,  editing  will
+        immediately be shifted to the filename specified. If you  do
+        not supply the filename argument you will be prompted for it
+        by "MEM: ". You must then enter the name  of  the  file  you
+        want  to  edit.   Note  that  if  you  do  not write out the
+        workspace before giving the NEW command, all changes will be
+        lost in the current file.
+
+        Example: NEW
+        Example: NEW EXPAND.C
+
+        FILE <filename>
+
+                The FILE command is used to change the name  of  the
+        current filename used in conjunction with the W command. The
+        filename argument is required.   The  new  current  filename
+        will then be displayed on the ruler-status line.
+
+        Example: FILE STRNCPY.C
+
+        !DEL <filename>
+
+                The !DEL command is used to delete  files  from  the
+        disk.  The  filename parameter is required. If the file does
+        not exist, the message "file not found" will be displayed on
+        the ruler-status line.
+
+        Example: !DEL STRNCPY.B
+
+        !REN <oldname> <newname>
+
+                The !REN command is used  to  rename  files  on  the
+        disk.  Both filename parameters are required. If the oldname
+        does not  exist,  the  message  "file  not  found"  will  be
+        displayed  on  the  ruler-status  line.  If  newname already
+        exists, the message "file already exists" will be displayed.
+        You  must  then  !DEL newname before the rename command will
+        work.
+
+        Example: !REN STRNCPY.B STRNCPY.C
+
+
+        HELP (display quick reference)
+
+                The HELP command  will  display  a  quick  reference
+        guide showing all the currently supported commands and their
+        syntax.
+
+        <UP-ARROW>, <DOWN-ARROW>
+
+                Within the type I command  area,  the  up  and  down
+        arrow  keys  allow  you  to browse through the past commands
+        saved on a command history  stack.   By  pressing  the  <UP-
+        ARROW>  key,  successivly  older  commands  are recalled and
+        displayed in the  type  I  command  area.  By  pressing  the
+        <DOWN-ARROW>  key,  successivly  newer commands are recalled
+        and displayed in the type I  command  area.  The  <INS>  and
+        <DEL>  keys may then be used to edit an older command into a
+        new one or the recalled command may be  re-executed  as  is.
+        Only  the  last 50 commands are saved on the command history
+        stack.  As  the  stack  overflows,  the  oldest  command  is
+        discarded.  If  you  press  either  the <UP-ARROW> or <DOWN-
+        ARROW> keys until the command history  stack  is  exhausted,
+        the bell will be sounded informing you of this condition. If
+        the current command entered is exactly the same as the  last
+        command  contained  on  the  command  history stack, the new
+        command will not be saved on the stack.  This feature  keeps
+        the command history stack compact and less redundent.
+
+        <LEFT-ARROW>, <BACKSPACE> (move cursor)
+
+                The <LEFT-ARROW> or <BACKSPACE> keys will  move  the
+        cursor one column to the left.
+
+        <RIGHT-ARROW>
+
+                The <RIGHT-ARROW>  key  will  move  the  cursor  one
+        column to the right.
+
+        <INS> (enter or exit insert mode)
+
+                The insert key <INS> is used to put  the  editor  in
+        and  out  of insert mode. When the editor is not insert mode
+        (ie. replace mode, the default), characters are replaced  on
+        the  type I command line. When in insert mode, all remaining
+        characters from the current column are pushed one column  to
+        the  right  to  allow  space for the new inserted character.
+        When the editor is in insert mode,  a  '+'  (plus  sign)  is
+        displayed in the upper right hand corner of the screen.
+
+        <DEL> (delete a character)
+
+                The delete key <DEL> is used to delete the character
+        at the current cursor position. All the remaining characters
+        are moved one column to the left. The delete key may be used
+        in replace or insert mode.
+
+        <ESC> (discard command)
+
+                The escape key <ESC> is used to discard the  current
+        command  (if  any)  visable  in the type I command area. The
+        type I command area is cleared and is ready to recieve a new
+        command.
+
+        <RETURN>, <END> (execute type I command  or  enter  type  II
+        area)
+
+                The <RETURN> and  <END>  keys  perform  one  of  two
+        functions. If there are any non blank characters in the type
+        I command area, it is assumed to be a type I command and  is
+        passed  to the type I command processor. Otherwise, the type
+        II command area is entered (ie. full screen  area)  and  the
+        "FS" (ie. full screen) message is displayed on the far right
+        of the  ruler-status  line.  If  the  type  I  command  area
+        contains  an  invalid  command,  the  message  "invalid edit
+        command" will be displayed on the ruler-status line.
+
+        V.      R-EDIT Type II & III Commands in Detail
+
+                Before formally defining the type  II  A,C,D,I,K,M,"
+        and  /  commands, a short word about how the type II command
+        processor works will be helpfull. The type II  command  area
+        is parsed from top to bottom. Each line in the type III area
+        has a corresponding type II command line. More than one type
+        II  command  may  be entered before executing them using the
+        <END> key.  There are some limitations to  the  use  of  the
+        type  II  command  area  though.  Suppose for example, a D10
+        command is entered on the first line in the type II  command
+        area  and  on the fifth line a A6 command is entered. The A6
+        command will be deleted along with the lines in the type III
+        area  affected  by  the D10 command. The same goes for the M
+        command as a deletion is performed prior to insertion. Also,
+        the  C,I,K  and  M  commands  perform  a  disk access to the
+        "stack" which is used to hold lines from the workspace to be
+        used  at  a  later  time. To enter the type II command area,
+        press the <RETURN> or <END> key  without  typing  any  other
+        characters in the type I command area.
+
+        A(ppend line) [nnn]
+
+                The A command allocates a new editable area  in  the
+        workspace.  Any lines that exist after the line on which the
+        A command is found are pushed down nnn lines  to  make  room
+        for  the  new editable area. If the nnn argument is ommited,
+        it is assumed to be 1. The editor  will  then  position  the
+        cursor in the first column of the first appended line in the
+        type III area to allow you to enter text.
+
+        Example: A20
+        Example: A
+
+        C(opy line) [nnn]
+
+                The C command will  copy  the  specified  number  of
+        lines  to  the  disk  stack.  If  no argument is given it is
+        assumed to be 1. The previous contents of the stack (if any)
+        are  destroyed.  Note  that  the  stack  is not removed upon
+        exiting the editor. You may re-enter the  editor  and  still
+        insert  the  stack  at a later time (providing the stack has
+        not been removed by some  other  means).  Another  important
+        feature  of the C command is that it may be issued more than
+        once in the same viewport and effectively used if there  are
+        insert (ie. I) commands interspersed between the C commands.
+
+        Example: C12
+        Example: C
+
+        D(elete line) [nnn]
+
+                The D command deletes the specified number of  lines
+        from the workspace. If no argument is given it is assumed to
+        be 1. As explained  above,  if  any  of  the  lines  deleted
+        contain  type  II  commands,  these  commands  will  also be
+        deleted.
+
+        Example: D12
+        Example: D
+
+        I(nsert line(s))
+
+                The I command inserts the current stack  within  the
+        workspace  on  the line following the line the I command was
+        issued on. Any remaining lines are pushed down to make  room
+        for the stack. Currently, no argument is allowed.
+
+        Example: I
+
+        K(opy line) [nnn]
+
+                The K command allows the specified number  of  lines
+        in the workspace to be appended to the stack. If no argument
+        is given it is assumed to be 1.  The K  command  works  like
+        the C command execpt that any previous contents of the stack
+        are preserved. This feature allows you to build the stack in
+        any way you choose for later insertion.
+
+        Example: K12
+        Example: K
+
+        M(ove line) [nnn]
+
+                The M command  allows  you  to  move  the  specified
+        number  of  lines  to  the  stack for later insertion. If no
+        argument is given it  is  assumed  to  be  1.  Any  previous
+        contents  on  the stack are destroyed. The M command is like
+        the C command except that the lines written to the stack are
+        removed from the workspace.
+
+        Example: M12
+        Example: M
+
+        "(duplicate line) [nnn]
+
+                The " command duplicates  the  specified  number  of
+        lines  in  the  workspace.  If  no  argument  is given it is
+        assumed to be 1. The " command is like the A command  except
+        that the line on which the " command is found is duplicated.
+
+        Example: "12
+        Example: "
+
+        /(set new current line)
+
+                The / command will force the line  on  which  it  is
+        found to become the current line (ie. displayed on the first
+        line of the type III area.
+
+        Example: /
+
+        <HOME>
+
+                The Home key will place the cursor in column one  of
+        the first type II command line.
+
+        <UP-ARROW>
+
+                The <UP-ARROW> key will move the cursor up one  line
+        unless  the  cursor  is already at the top of the type II or
+        III area in which case the cursor will be moved to the  last
+        line displayed in the type II or III area.
+
+        <DOWN-ARROW>
+
+                The <DOWN-ARROW> key will move the cursor  down  one
+        line  unless the cursor is already at the bottom of the type
+        II or III area in which case the cursor will be moved to the
+        first line displayed in the type II or III area.
+
+        <LEFT-ARROW>, <BACKSPACE>
+
+                The <LEFT-ARROW> or <BACKSPACE> keys will  move  the
+        cursor  one  column to the left. In the case that the cursor
+        is in the first column of the type III area, the cursor will
+        jump to the last column of the corresponding type II line.
+
+        <RIGHT-ARROW>
+
+                The <RIGHT-ARROW>  key  will  move  the  cursor  one
+        column  to the right.  In the case that the cursor is in the
+        last column of the type II area, the cursor will jump to the
+        first column of the corresponding type III line.
+
+        <CTRL><LEFT-ARROW>
+
+                The <CTRL><LEFT-ARROW> sequence will do one of  four
+        things:  Move  the cursor to the last column of the type III
+        area, move the cursor to the end of text  in  the  type  III
+        area,  move  the  cursor to the first column in the type III
+        area or move the cursor to the first column of the  type  II
+        area.  This  action is performed with continous wrap around.
+        This key sequence allows you to move around rapidly  in  the
+        full screen area.
+
+        <CTRL><RIGHT-ARROW>
+
+                The <CTRL><RIGHT-ARROW> sequence will do one of four
+        things:  Move the cursor to the first column of the type III
+        area, move the cursor to the end of text  in  the  type  III
+        area,  move  the  cursor  to the last column in the type III
+        area or move the cursor to the first column of the  type  II
+        area.  This  action is performed with continous wrap around.
+        This key sequence allows you to move around rapidly  in  the
+        full screen area.
+
+        <TAB>
+
+                The <TAB> key will always function as a quick way to
+        jump  to the type III area from the type II command area. If
+        you have set your tabs to something, then the tab  key  will
+        position the cursor at the next logical tab stop.
+
+        <SHIFT><TAB>
+
+                The <SHIFT><TAB> key will always function as a quick
+        way  to  jump  to the type II command area from the type III
+        area. If you have set  your  tabs  to  something,  then  the
+        <SHIFT><TAB>  key  sequence  will position the cursor at the
+        next logical tab stop to the left.
+
+        <RETURN>
+
+                The <RETURN> key will move the cursor  to  the  next
+        line  of  whichever  area  (ie.  type  II  or  III)  you are
+        currently in. If you are on the  last  line  displayed,  the
+        cursor  will move to the first line in either the type II or
+        III area.
+
+        <INS> (enter or exit insert mode)
+
+                The insert key <INS> is used to put  the  editor  in
+        and  out  of insert mode. When the editor is not insert mode
+        (ie. replace mode, the default), characters are replaced  in
+        either  the  type II or type III areas. When in insert mode,
+        all remaining characters from the current column are  pushed
+        one  column to the right to allow space for the new inserted
+        character.  When the editor is in insert mode, a  '+'  (plus
+        sign)  is  displayed  in  the upper right hand corner of the
+        screen.
+
+        <DEL> (delete a character)
+
+                The delete key <DEL> is used to delete the character
+        at the current cursor position. All the remaining characters
+        are moved one column to the left. The delete key may be used
+        in replace or insert mode.
+
+                The escape key <ESC> is used to discard the  current
+        modifications  (if any) visible or invisible (ie. not in the
+        current viewport) in the type II and III areas. The type  II
+        command  area  is  cleared  and  the type III area is reset.
+        Control is passed back to the type I command processor.
+
+        <END> (save all modifications in type II and III)
+
+                The <END> key saves all modifications  made  in  the
+        type  III  area  and then executes any commands found in the
+        type II command area.
+
+        VI      Appendix A
+
+        Error and Warning Messages.
+
+        "workspace empty" (Warning)
+
+                The action to be performed will have no effect since
+        the workspace is empty.
+
+        "file not found" (Error)
+
+                During a !DEL or !REN operation, the named file  was
+        not found.
+
+        "invalid edit command" (Error)
+
+                The type I command processor detected an invalid  or
+        incorrectly entered command.
+
+        "?error in REDIT.RC" (Error)
+
+                When  initializing  the  editor  using  the  profile
+        REDIT.RC,  an  invalid  or  incorrectly  entered command was
+        encountered was detected.  This error may also be caused  by
+        including  a command in REDIT.RC which is not allowed during
+        the initialization phase.
+
+        "missing argument" (Error)
+
+                The  command  encountered  by  the  type  I  command
+        processor was supplied without the necessary argument(s).
+
+        "at viewport boundry" (Warning)
+
+                An attempt was made to position the viewport  beyond
+        the boundries of the workspace.
+
+        "function key not available" (Error)
+
+                The named function key is not programmable. Only the
+        first twelve function keys are available to program.
+
+        "invalid tabs" (Error)
+
+                The tab sequence entered to  the  TABS  command  was
+        invalid  (ie.  non-increasing sequence or a tab stop greater
+        than 250).
+
+        "error in type II area" (Error)
+
+                An invalid type II command was  encountered  by  the
+        type II command processor.
+
+        "only A,C,D,I,K,M,/,",[1-9]" (Error)
+
+                When in the type II area, an invalid command  letter
+        was entered.
+
+        "pattern null" (Error)
+
+                When using the ?, LU or  LD  commands,  no  previous
+        value has been loaded in the pattern matching string. See LU
+        and LD.
+
+        "pattern not found" (Warning)
+
+                When searching using  the  LU  and  LD  commands  or
+        changing  strings  using the C command, the pattern searched
+        for was not found.
+
+        "can't find \REDIT.HLP" (Error)
+
+                The quick reference help menu could not be found  on
+        the root directory on the current disk.
+
+        "out of memory" (Severe Error)
+
+                No more memory could be  allocated.  The  editor  is
+        terminated.
+
+        "can't create __STACK, errno=nnn" (Severe Error)
+        "can't create __TEMP, errno=nnn" (Severe Error)
+        "can't create filename, errno=nnn" (Severe Error)
+        "write error on __STACK, errno=nnn" (Severe Error)
+        "write error on __TEMP, errno=nnn" (Severe Error)
+        "write error on filename, errno=nnn" (Severe Error)
+
+                Some internal error has occured. The internal  error
+        indeicator errno is set to the error condition.
+
+        VII     Appendix B
+
+        Files Used by REDIT
+
+        \REDIT.HLP
+
+                The quick reference on-line manual. This file should
+        reside  in  the  root  directory of all disks on which REDIT
+        will be used. If it is not found, an warning message will be
+        displayed but editing may still be done.
+
+        \REDIT.RC
+
+                The setup profile for REDIT. This file  is  optional
+        and  serves  as  the  default  profile.  Note  that  a local
+        REDIT.RC may reside  in  any  directory.  REDIT  will  first
+        search  the  local directory for the profile. If found it is
+        used.  Otherwise REDIT will search the root directory \.  If
+        found  it  is  used.  If  no  REDIT.RC file is found then no
+        startup profiling is performed and all default  values  will
+        be used.
+
+        __STACK
+
+                The disk stack file used in the type II C,I,K and  M
+        commands.  Note  that  this  file  is  not  removed when the
+        editing session is terminated.
+
+        __TEMP
+
+                This  file  is  only  used   for   temporary   stack
+        operations when using the type II K command.
+
+        Appendix C
+
+
+        Starting REDIT
+
+                REDIT may be started in one of two ways.  The  first
+        method  involves  changing  directories  to the desired one.
+        Then type REDIT followed by <RETURN>.  The editor will  then
+        prompt  you  for the name of the file you want to edit.  The
+        second method is very similar except that you  may  specifiy
+        the  name of the file you want to edit when you start REDIT.
+        For example:
+
+                CD \C\TOOLS <RETURN>
+                REDIT STRNCMP.C <RETURN>
+
+
+
+        The Ruler-Status Line
+
+                The ruler-status line is where all messages,  errors
+        and  warnings  are reported. It is also where the default or
+        current file name is displayed.  At the far right, a message
+        code  telling  you if you are in full screen mode (ie. "FS",
+        meaning either in type II or III area) or a wait state  (ie.
+        "WT", REDIT is redrawing, etc.).
+
